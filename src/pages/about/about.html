@@ -1,11 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      About
+      Saved Images
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ul *ngFor="let post of posts | async">
+    <h1><strong>{{post.date}}</strong></h1>
+    <ion-avatar>
+      <img src="{{post.Url}}">
+    </ion-avatar>
+  </ul>
 
 </ion-content>
