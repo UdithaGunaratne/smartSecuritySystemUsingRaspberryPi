@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
+import 'rxjs/add/operator/map';
+
+interface Post{
+  Url: string;
+}
 
 @Component({
   selector: 'page-home',
@@ -7,8 +14,16 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  postCol: AngularFirestoreCollection<Post>;
+  posts: Observable<Post[]>
 
+  constructor(public navCtrl: NavController, private afs: AngularFirestore) {
+
+  }
+
+  ngOnInit(){
+    this.postCol = this.afs.collection('users/alovelace/liveFeed');
+    this.posts = this.postCol.valueChanges();
   }
 
 }
